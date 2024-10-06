@@ -1,0 +1,52 @@
+from tkinter import *
+from tkinter import messagebox
+from datetime import datetime
+
+# Function to calculate age
+def calculate_age():
+    try:
+        day = int(entry_day.get())
+        month = int(entry_month.get())
+        year = int(entry_year.get())
+        
+        # Get the current date
+        today = datetime.today()
+
+        # Create the birthdate object
+        birthdate = datetime(year, month, day)
+
+        # Calculate the age
+        age = today.year - birthdate.year - ((today.month, today.day) < (birthdate.month, birthdate.day))
+
+        # Display the result
+        messagebox.showinfo("Age", "Your age is: {age} years.")
+    
+    except ValueError:
+        messagebox.showerror("Error", "Please enter valid numeric values.")
+
+# Create the main window
+root = Tk()
+root.title("Age Calculator")
+
+# Create labels and entry fields for day, month, and year
+label_day = Label(root, text="Enter day:")
+label_day.grid(row=0, column=0, padx=10, pady=10)
+entry_day = Entry(root)
+entry_day.grid(row=0, column=1, padx=10, pady=10)
+
+label_month = Label(root, text="Enter month:")
+label_month.grid(row=1, column=0, padx=10, pady=10)
+entry_month = Entry(root)
+entry_month.grid(row=1, column=1, padx=10, pady=10)
+
+label_year = Label(root, text="Enter year:")
+label_year.grid(row=2, column=0, padx=10, pady=10)
+entry_year = Entry(root)
+entry_year.grid(row=2, column=1, padx=10, pady=10)
+
+# Create a button to calculate age
+button_calculate = Button(root, text="Calculate Age", command=calculate_age)
+button_calculate.grid(row=3, columnspan=2, padx=10, pady=10)
+
+# Start the Tkinter event loop
+root.mainloop()
